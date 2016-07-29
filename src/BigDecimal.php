@@ -113,6 +113,22 @@ final class BigDecimal extends BigNumber implements \Serializable
     }
 
     /**
+     * Returns a BigDecimal representing two, with a scale of zero.
+     *
+     * @return BigDecimal
+     */
+    public static function two()
+    {
+        static $two = null;
+
+        if ($two === null) {
+            $two = new BigDecimal('2');
+        }
+
+        return $two;
+    }
+
+    /**
      * Returns a BigDecimal representing ten, with a scale of zero.
      *
      * @return BigDecimal
@@ -412,6 +428,32 @@ final class BigDecimal extends BigNumber implements \Serializable
         $remainder = new BigDecimal($remainder, $scale);
 
         return [$quotient, $remainder];
+    }
+    /**
+     * Returns the square root of this number.
+     *
+     * The quotient has a scale of `0`, and the remainder has a scale of `0`.
+     *
+     * @return BigDecimal With the square root of this number.
+     *
+     * @throws IsNegativeException If this number is negative.
+     */
+    public function sqrt()
+    {
+        if ($this->isNegative()) {
+            throw IsNegativeException::isNegative($this);
+        }
+        $two = BigDecimal::two();
+        $guess = $this->quotient($two);
+        while (true) {
+            $last = $guess;
+            $guess = $this->quotient($guess)->add($guess)->quotient($two);
+            // (($n / $guess) + $guess) / 2;
+            if($last->compareTo($guess) == 0) {
+                break;
+            }
+        }
+        return $guess;
     }
 
     /**

@@ -1359,6 +1359,8 @@ class BigDecimalTest extends AbstractTestCase
     {
         BigDecimal::of(1.2)->quotient(0);
     }
+    
+    
 
     /**
      * @expectedException \Brick\Math\Exception\DivisionByZeroException
@@ -1368,12 +1370,9 @@ class BigDecimalTest extends AbstractTestCase
         BigDecimal::of(1.2)->remainder(0);
     }
 
-    /**
-     * @expectedException \Brick\Math\Exception\DivisionByZeroException
-     */
-    public function testQuotientAndRemainderOfZeroThrowsException()
+    public function testsqrt()
     {
-        BigDecimal::of(1.2)->quotientAndRemainder(0);
+        $this->assertSame(BigDecimal::of(625)->sqrt(), BigDecimal::of(25));
     }
 
     /**
