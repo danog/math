@@ -1372,7 +1372,7 @@ class BigDecimalTest extends AbstractTestCase
 
     public function testsqrt()
     {
-        $this->assertSame(BigDecimal::of(625)->sqrt(), BigDecimal::of(25));
+        $this->assertSame(BigDecimal::of(625)->sqrt()->compareTo(25), 0);
     }
 
     /**

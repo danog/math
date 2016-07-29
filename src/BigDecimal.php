@@ -447,7 +447,7 @@ final class BigDecimal extends BigNumber implements \Serializable
         $guess = $this->quotient($two);
         while (true) {
             $last = $guess;
-            $guess = $this->quotient($guess)->add($guess)->quotient($two);
+            $guess = $this->quotient($guess)->plus($guess)->quotient($two);
             // (($n / $guess) + $guess) / 2;
             if($last->compareTo($guess) == 0) {
                 break;
