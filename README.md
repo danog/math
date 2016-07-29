@@ -103,8 +103,7 @@ BigDecimal::of('1/3'); // ArithmeticException
 
 Note about native integers: instantiating from an `int` is safe *as long as you don't exceed the maximum
 value for your platform* (`PHP_INT_MAX`), in which case it would be transparently converted to `float` by PHP without
-notice, and could result in a loss of information. In doubt, prefer instantiating from a `string`, which supports
-an unlimited numbers of digits:
+notice, and could result in a loss of information. In doubt, prefer instantiating from a `string`, since it can store up to 2147483647 digits:
 
 ```php
 echo BigInteger::of(999999999999999999999); // 1000000000000000000000
@@ -112,8 +111,7 @@ echo BigInteger::of('999999999999999999999'); // 999999999999999999999
 ```
 
 Note about floating-point values: instantiating from a `float` might be unsafe, as floating-point values are
-imprecise by design, and could result in a loss of information. Always prefer instantiating from a `string`, which
-supports an unlimited number of digits:
+imprecise by design, and could result in a loss of information. Always prefer instantiating from a `string`, since it can store up to 2147483647 digits:
 
 ```php
 echo BigDecimal::of(1.99999999999999999999); // 2
